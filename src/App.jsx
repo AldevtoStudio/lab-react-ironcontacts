@@ -8,10 +8,15 @@ function App() {
   const handleAddRandom = () => {
     if (contacts.length === producerContacts.length) return;
 
-    setContacts([
-      ...contacts,
-      producerContacts[Math.floor(Math.random() * producerContacts.length)]
-    ]);
+    let random = selectRandom(producerContacts);
+
+    while (contacts.includes(random)) random = selectRandom(producerContacts);
+
+    setContacts([...contacts, random]);
+  };
+
+  const selectRandom = (arr) => {
+    return arr[Math.floor(Math.random() * producerContacts.length)];
   };
 
   const handleSortByPopularity = () => {
